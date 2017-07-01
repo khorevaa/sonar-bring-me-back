@@ -1,3 +1,9 @@
+CURDIR=$1
 
-docker run -it -rm 
-    silverbulleters/sonar-history-runner $GIT_URL $START_DATE
+# in Windows there sh.exe does not provide correct path for docker
+if [ -z "$1" ]; then
+    CURDIR=$PWD
+fi
+
+docker run -it --rm -v "$CURDIR":/gitrepo
+    silverbulleters/sonar-history-runner  $START_DATE
