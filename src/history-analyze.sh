@@ -26,6 +26,9 @@ fi
 cp -avr /gitrepo /tmp/gitrepo
 
 pushd /tmp/gitrepo
+
+git clean -df
+
 for hash in `git --no-pager log --reverse --pretty=format:%h`
 do
 
@@ -33,10 +36,11 @@ do
     
     echo "Checking out source from $HASH_DATE with as $hash"
 
-    git checkout $hash  > /dev/null 2>&1
-    #git clean -df > /dev/null 2>&1
+    git checkout $hash  #> /dev/null 2>&1
+    git clean -df #> /dev/null 2>&1
 
-    git --no-pager log -1
+    STATUS=`git show --oneline -s`
+    echo $STATUS
 
     #SONAR_PROJECT_COMMAND="$SONAR_COMMAND -Dsonar.projectDate=$HASH_DATE"
 
