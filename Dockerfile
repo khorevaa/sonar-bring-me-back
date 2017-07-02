@@ -2,6 +2,8 @@ FROM maven:3-jdk-8-alpine
 
 ENV SONAR_SCANNER_VERSION 3.0.3.778
 
+RUN apk add dos2unix --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh
 
@@ -26,5 +28,9 @@ RUN chmod +x /opt/history-analyze.sh
 VOLUME /gitrepo
 
 WORKDIR /gitrepo
+
+ENV SONAR_SCANNER_OPTS -Xmx512m 
+ENV SONAR_SERVER_URL http://localhost:9000
+ENV SONAR_TOKEN ""
 
 CMD /opt/history-analyze.sh

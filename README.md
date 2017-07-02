@@ -3,7 +3,13 @@
 simply run:
 
 * install docker
-* clone the your repo
+* clone the your repo in some place
+* create file `.env` in your repo with this content
+```
+SONAR_SCANNER_OPTS=-Xmx512m (or some additional scanner opts)
+SONAR_SERVER_URL=<your-sonarserver-url>
+SONAR_TOKEN=<yourapitoken>
+```
 * checkout branch from `origin/some-branch`
   * dont forget fill `sonar-project.properties` in your project
 * run command specified on your OS
@@ -11,7 +17,7 @@ simply run:
 ### Linux
 
 ```
-docker run -it --rm -v "$PWD":/gitrepo silverbulleters/sonar-history-runner
+docker run -it --rm --env-file=.env -v "$PWD":/gitrepo silverbulleters/sonar-history-runner
 ```
 
 ### Windows
@@ -22,7 +28,7 @@ create `bat` file with this conent
 set CURPWD=%cd%
 set CURPWD=%CURPWD:\=/%
 
-docker run -it --rm -v "%CURPWD%":/gitrepo silverbulleters/sonar-history-runner
+docker run -it --rm --env-file=.env -v "%CURPWD%":/gitrepo silverbulleters/sonar-history-runner
 ```
 
 and run it
@@ -53,3 +59,15 @@ for that we need to do some steps
 * simple example by tags https://gist.github.com/aslakknutsen/2422117
 * official docs for scanner https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
 * advanced usage of sonar scaner https://docs.sonarqube.org/display/SCAN/Advanced+SonarQube+Scanner+Usages
+
+
+## Limitation
+
+if you have many revision in one day - you may see analyze error on sonarqube with this content
+
+```
+Validation of project failed:
+  o Date of analysis cannot be older than the date of the last known analysis on this project. Value: 
+```
+
+this is not bug, this is a limitation of sonar.projectDate parameter - you may set only date, not time in this parametr  
