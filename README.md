@@ -15,6 +15,9 @@ START_DATE=0001-01-01
   * dont forget fill `sonar-project.properties` in your project
 * run command specified on your OS
 
+[![Docker Stars](https://img.shields.io/docker/stars/silverbulleters/sonar-history-runner.svg)](https://hub.docker.com/r/silverbulleters/sonar-history-runner/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/silverbulleters/sonar-history-runner.svg)](https://hub.docker.com/r/silverbulleters/sonar-history-runner/)
+
 ### Linux
 
 ```
@@ -72,3 +75,5 @@ Validation of project failed:
 ```
 
 this is not bug, this is a limitation of sonar.projectDate parameter - you may set only date, not time in this parametr  
+
+[![](http://dockeri.co/image/silverbulleters/sonar-history-runner)](https://hub.docker.com/r/silverbulleters/sonar-history-runner/)
