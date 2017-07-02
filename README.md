@@ -77,3 +77,19 @@ Validation of project failed:
 this is not bug, this is a limitation of sonar.projectDate parameter - you may set only date, not time in this parametr  
 
 [![](http://dockeri.co/image/silverbulleters/sonar-history-runner)](https://hub.docker.com/r/silverbulleters/sonar-history-runner/)
+
+### For Russian Users
+
+Данный проект реализован для "ввода остатков" технического долга на основе вашего git репозитория и используется в следующих кейсах
+
+#### Для 1С и SonarQube
+
+* Вы используйте gitsync - https://github.com/oscript-library/gitsync
+* Вы решили использовать наш плагин для 1С - https://github.com/silverbulleters/sonar-1c-bsl-public
+* Вам нужно проанализировать историю вашего кода с момента использования Git для 1С
+
+#### Для других языков
+
+* Вы использовали GIT
+* Вы только недавно прочитали статью про SonarQube
+* Вы решили ввести остатки своего технического долга
