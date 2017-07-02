@@ -8,6 +8,9 @@ GIT_REPO=/gitrepo
 ls -al /gitrepo
 git --version
 
+#SONAR_SCANNER_OPTS+=" -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
+#echo $SONAR_SCANNER_OPTS
+
 #MVN_COMMAND="mvn clean install"
 #SONAR_COMMAND="mvn org.codehaus.sonar:sonar-maven3-plugin:3.3.0.603:sonar"
 SONAR_COMMAND="sonar-scanner"

@@ -39,6 +39,11 @@ and run it
 
 note: on docker for windows there is strange behavior with mount localdrive with PWD command, thants why run command so strange
 
+### Debug run
+
+* enter to container bash `docker run -it --rm --env-file=.env -v "%CURPWD%":/gitrepo silverbulleters/sonar-history-runner bash`
+* run `./sonar-runner` 
+
 ### For what
 
 * if you start use SonarQube for your git repo yo may want to load your tech debt from first commit to current date
@@ -63,7 +68,6 @@ for that we need to do some steps
 * simple example by tags https://gist.github.com/aslakknutsen/2422117
 * official docs for scanner https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
 * advanced usage of sonar scaner https://docs.sonarqube.org/display/SCAN/Advanced+SonarQube+Scanner+Usages
-
 
 ## Limitation
 
