@@ -9,6 +9,7 @@ simply run:
 SONAR_SCANNER_OPTS=-Xmx512m (or some additional scanner opts)
 SONAR_SERVER_URL=<your-sonarserver-url>
 SONAR_TOKEN=<yourapitoken>
+START_DATE=0001-01-01
 ```
 * checkout branch from `origin/some-branch`
   * dont forget fill `sonar-project.properties` in your project

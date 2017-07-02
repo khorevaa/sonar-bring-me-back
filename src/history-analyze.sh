@@ -13,8 +13,11 @@ git --version
 SONAR_COMMAND="sonar-scanner"
 
 if [ -z "$START_DATE" ]; then
+    LASTDATE="0001-01-01"
     echo "Missing program argument: start-date"
     echo "Analyze wil start from first commit of branch"
+else
+    LASTDATE=$START_DATE
 fi
 
 if [ -z "$SONAR_TOKEN" ]; then
@@ -39,8 +42,6 @@ dos2unix /tmp/sonar-project.properties
 pushd /tmp/gitrepo
 
 git clean -df
-
-LASTDATE="00010101"
 
 for hash in `git --no-pager log --reverse --pretty=format:%h`
 do
