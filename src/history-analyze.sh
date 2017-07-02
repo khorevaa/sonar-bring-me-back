@@ -67,7 +67,8 @@ do
 
     #echo "Executing Maven: $MVN_COMMAND"
     #$MVN_COMMAND > /dev/null 2>&1
-    #echo "Executing Sonar: $SONAR_PROJECT_COMMAND"
-    $SONAR_PROJECT_COMMAND || exit 42 #> /dev/null 2>&1
+    echo "Executing Sonar: $SONAR_PROJECT_COMMAND"
+    #$SONAR_PROJECT_COMMAND || exit 42 #> /dev/null 2>&1
+    $SONAR_PROJECT_COMMAND > /dev/null 2>&1
 done
 popd
