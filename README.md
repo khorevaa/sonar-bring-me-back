@@ -1,16 +1,33 @@
-## Analyze git repo with SonarQube 
+## Analyze history of git repo with SonarQube 
 
 simply run:
 
 * install docker
 * clone the your repo
 * checkout branch from `origin/some-branch`
-* run  `sonar-history.sh <git-branch> <start-date>`
+  * dont forget fill `sonar-project.properties` in your project
+* run command specified on your OS
 
-notes: 
+### Linux
 
-* if you are on windows - please install msgit with `unix` tools and run `sonar-history.bat`
-* dont forget fill sonar-project.proper in your project
+```
+docker run -it --rm -v "$PWD":/gitrepo silverbulleters/sonar-history-runner
+```
+
+### Windows
+
+create `bat` file with this conent
+
+```
+set CURPWD=%cd%
+set CURPWD=%CURPWD:\=/%
+
+docker run -it --rm -v "%CURPWD%":/gitrepo silverbulleters/sonar-history-runner
+```
+
+and run it
+
+note: on docker for windows there is strange behavior with mount localdrive with PWD command, thants why run command so strange
 
 ### For what
 

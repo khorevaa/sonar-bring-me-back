@@ -6,7 +6,7 @@ GIT_REPO=/gitrepo
 START_DATE=$1
 
 ls -al /gitrepo
-git --vesrion
+git --version
 
 #MVN_COMMAND="mvn clean install"
 #SONAR_COMMAND="mvn org.codehaus.sonar:sonar-maven3-plugin:3.3.0.603:sonar"
@@ -24,7 +24,9 @@ else
   exit 42 # "why 42 ? please googl it as an answer"
 fi
 
-cp -avr /gitrepo /tmp/gitrepo
+cp -ar /gitrepo /tmp/gitrepo
+cp /gitrepo/sonar-project.properties /tmp/sonar-project.properties || \
+  { echo "You need to create sonar-projects.properties file"; exit 42;}
 
 pushd /tmp/gitrepo
 
@@ -39,6 +41,9 @@ do
 
     git reset --hard $hash > /dev/null 2>&1
 
+    # finaly copy last sonar-project.properties
+    cp /tmp/sonar-project.properties ./sonar-project.properties
+
     # this will not working on latest git
     # see https://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit
     #git checkout $hash  > /dev/null 2>&1
@@ -52,7 +57,6 @@ do
     #echo "Executing Maven: $MVN_COMMAND"
     #$MVN_COMMAND > /dev/null 2>&1
     #echo "Executing Sonar: $SONAR_PROJECT_COMMAND"
-    $SONAR_PROJECT_COMMAND #> /dev/null 2>&1
-    exit
+    $SONAR_PROJECT_COMMAND > /dev/null 2>&1
 done
 popd
