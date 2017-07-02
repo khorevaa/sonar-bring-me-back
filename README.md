@@ -93,3 +93,9 @@ this is not bug, this is a limitation of sonar.projectDate parameter - you may s
 * Вы использовали GIT
 * Вы только недавно прочитали статью про SonarQube
 * Вы решили ввести остатки своего технического долга
+
+## GIFs
+
+after analyze you may see your history
+
+![](images/HistorySonarQube.gif)
