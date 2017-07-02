@@ -40,12 +40,23 @@ pushd /tmp/gitrepo
 
 git clean -df
 
+LASTDATE="00010101"
+
 for hash in `git --no-pager log --reverse --pretty=format:%h`
 do
     #T03:00:00+0300
     HASH_DATE=`git show $hash --date=iso | grep Date: -m1 | cut -d' ' -f 4`
     HASH_TIME=`git show $hash --date=iso | grep Date: -m1 | cut -d' ' -f 5`
 
+    if [[ "$HASH_DATE" > "$LASTDATE" ]] ;
+    then
+      echo "New commit in new date $HASH_DATE"
+      LASTDATE=$HASH_DATE 
+    else
+      echo "Hash $hash skiped $HASH_DATE"
+      continue
+    fi
+    
     TIMESTAM=`grep sonar.projectVersion /tmp/sonar-project.properties | cut -d'=' -f 2`
 
     echo "Checking out source $HASH_DATE with as $hash on $TIMESTAM-$HASH_TIME"
@@ -67,8 +78,14 @@ do
 
     #echo "Executing Maven: $MVN_COMMAND"
     #$MVN_COMMAND > /dev/null 2>&1
-    echo "Executing Sonar: $SONAR_PROJECT_COMMAND"
+    #echo "Executing Sonar: $SONAR_PROJECT_COMMAND"
     #$SONAR_PROJECT_COMMAND || exit 42 #> /dev/null 2>&1
-    $SONAR_PROJECT_COMMAND > /dev/null 2>&1
+    $SONAR_PROJECT_COMMAND #> /dev/null 2>&1
 done
+
+git reset --hard $hash > /dev/null 2>&1
+SONAR_PROJECT_COMMAND="$SONAR_COMMAND -Dsonar.host.url=$SONAR_SERVER_URL $AUTH -Dsonar.projectVersion=$TIMESTAM-$HASH_TIME"
+echo "last hash $hash analyze"
+$SONAR_PROJECT_COMMAND
+
 popd
